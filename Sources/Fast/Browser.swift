@@ -4408,6 +4408,7 @@ final class Browser: NSObject, ObservableObject, Relaying {
     /// closed there, without going to it, and kept for ⌘⇧T and the diary
     /// as a close in the row is.
     func closeElsewhere(_ tab: Tab) {
+        if closePeekTab(tab) { return }
         guard let space = parked.first(where: { $0.value.tabs.contains(where: { $0 === tab }) })?.key,
               let index = parked[space]?.tabs.firstIndex(where: { $0 === tab }) else { return }
         remember(tab, at: index)
@@ -9258,9 +9259,25 @@ extension Browser {
         download.webKitCreated()
     }
 
+    /// Closes a Peek tab when its page calls `window.close()` (for example at
+    /// the end of an adopted OAuth popup). Returns whether `tab` was a Peek.
+    @discardableResult
+    func closePeekTab(_ tab: Tab) -> Bool {
+        if peeking === tab {
+            closePeek()
+            return true
+        }
+        if let source = tabs.first(where: { $0.peek === tab }) ?? parkedTabs.first(where: { $0.peek === tab }) {
+            dropPeek(of: source)
+            return true
+        }
+        return false
+    }
+
     /// An ordinary tab's page asking to close itself.
     func pageClosed(_ page: any PageHandle) {
         guard let tab = tab(owning: page) else { return }
+        if closePeekTab(tab) { return }
         // Back to whoever opened it, so you land where you started the sign-in
         // rather than wherever the row happens to put you.
         if !tab.bench || tab.id == activeID, let home = self.tab(id: tab.opener) {
