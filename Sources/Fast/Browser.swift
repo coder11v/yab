@@ -9263,6 +9263,7 @@ extension Browser {
     /// the end of an adopted OAuth popup). Returns whether `tab` was a Peek.
     @discardableResult
     func closePeekTab(_ tab: Tab) -> Bool {
+        guard !isLive(tab) else { return false }
         if peeking === tab {
             closePeek()
             return true
