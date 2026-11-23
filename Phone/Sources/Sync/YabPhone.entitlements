@@ -2,36 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- Default Web Browser, granted by Apple to dev.serafim.fast.iphone on
-	     2026-10-12: Yab can be the iPhone's default browser (the http and
-	     https URL types in project.yml), and WKWebView gets service workers,
-	     the background of Manifest V3 extensions (Extensions/ExtensionHost). -->
-	<key>com.apple.developer.web-browser</key>
-	<true/>
-	<!-- Sync's key (Phone/Reference/digest/sync-ios.md 1.2): the app's own
-	     group first (the default for its items), then the Mac's, where
-	     iCloud Keychain brings the key a Mac in sync keeps, then the shared
-	     group of PLAN-iphone.md decision 5. Keychain Sharing on the App ID;
-	     the team's profile grants 25UG4QYN9F.*. -->
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)dev.serafim.fast.iphone</string>
 		<string>$(AppIdentifierPrefix)dev.serafim.fast</string>
 		<string>$(AppIdentifierPrefix)dev.serafim.fast.sync</string>
-	</array>
-	<!-- Silent pushes from the sync server (R2): the line catches up in the
-	     back. Production builds get "production" from the profile. -->
-	<key>aps-environment</key>
-	<string>development</string>
-	<!-- The share sheet's queue of links (Entrances, SharedLinkQueue): the
-	     share extension writes it, the app takes it. -->
-	<!-- An agent's question breaks through Focus and Scheduled Summary, as on
-	     the Mac (ApprovalNotice): Time Sensitive Notifications on the App ID. -->
-	<key>com.apple.developer.usernotifications.time-sensitive</key>
-	<true/>
-	<key>com.apple.security.application-groups</key>
-	<array>
-		<string>group.dev.serafim.fast.iphone</string>
 	</array>
 </dict>
 </plist>

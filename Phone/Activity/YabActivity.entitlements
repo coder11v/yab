@@ -2,11 +2,5 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- The Now widget's rows, which the app keeps as sync brings them
-	     (NowShelf). -->
-	<key>com.apple.security.application-groups</key>
-	<array>
-		<string>group.dev.serafim.fast.iphone</string>
-	</array>
 </dict>
 </plist>

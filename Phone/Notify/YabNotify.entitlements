@@ -2,15 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- The app's own group first, as in the app's list: the Sync key this
-	     iPhone runs with is there (SyncKeychain.local), read only. -->
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)dev.serafim.fast.iphone</string>
 	</array>
-	<!-- The question it opens stays Time Sensitive (ApprovalNotice), as the
-	     app's own; Time Sensitive Notifications on this App ID too. -->
-	<key>com.apple.developer.usernotifications.time-sensitive</key>
-	<true/>
 </dict>
 </plist>
